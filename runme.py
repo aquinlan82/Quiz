@@ -1,16 +1,14 @@
-from tkinter import *
-from helpers import *
+import tkinter as tk
+from file_helpers import *
+from gui_helpers import * 
 
 
- 
-class Root(Tk):
-    def __init__(self):
-        super(Root,self).__init__()
- 
-        self.title("Python Tkinter")
-        self.minsize(500,400)
- 
+# quiz_list = read_quiz_options()
+# chosen_quiz = QuizOptionInterface(quiz_list).selected_quiz_name
+chosen_quiz = "capitals"
 
-read_text_quiz("capitals", "capitals.txt")
-root = Root()
-root.mainloop()
+quiz_config = read_quiz_config(chosen_quiz)
+print(quiz_config)
+quiz_config = QuizConfigInterface(quiz_config).quiz_config
+print("hi")
+print(quiz_config["single_check"]["Reversed?"])

@@ -1,0 +1,33 @@
+{
+    "single_check": {
+        "Reversed?":"False",
+        "Another single option?":"False"
+    },
+    
+    "grouped_check": {
+    
+        "continents": {
+            "Africa": "True",
+            "Asia": "True",
+            "Australia": "True",
+            "Europe": "True",
+            "North America": "True",
+            "South America": "True"
+        },
+
+        "centuries": {
+            "1800s": "True",
+            "1900s": "True",
+            "2000s": "True"
+        } 
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":100,
+            "upper_limit":100,
+            "lower_limit":0
+        }
+    }
+    
+}

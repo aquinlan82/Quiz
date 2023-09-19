@@ -1,4 +1,14 @@
 
+import json
+
+def read_quiz_options():
+    return ["Capitals", "Presidental Pictures","smth","idk","item","dogy","piggy", "fob","lol"]
+
+
+def read_quiz_config(quiz_name):
+    f = open('data/capitals/capitals_config.json')
+    config = json.load(f)
+    return config
 
 
 def read_text_quiz(foldername, filename):
