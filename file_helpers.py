@@ -2,7 +2,7 @@
 import json
 
 def read_quiz_options():
-    return ["Capitals", "Presidental Pictures","smth","idk","item","dogy","piggy", "fob","lol"]
+    return ["Capitals", "Presidental Pictures","smth","idk","item","dogy","piggy", "fob","lol","1","2","3","4","5","6"]
 
 
 def read_quiz_config(quiz_name):

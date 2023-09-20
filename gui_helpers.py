@@ -5,34 +5,39 @@ from functools import partial
 class QuizOptionInterface:
     def __init__(self, quiz_list):
         self.window = tk.Tk()
-        #self.window.geometry("720x200")
+        self.window.geometry("720x500")
         self.window.title("Quiz")
 
         self.quiz_list = quiz_list
         self.selected_quiz_name = None 
 
+        self.light_blue = "#34A2FE"
+        self.dark_blue = "#3458EB"
+        self.gold = "#E6C35C"
+
+        # put on frame to use pixel widths
+        frame=tk.Frame(self.window, width=720, height=500)
+        frame.pack()
+
         # header
-        label = tk.Label(master=self.window, text="Select a Quiz", fg="white", bg="#34A2FE",width=50,height=5)
-        label.grid(row=0, column=0)
+        tk.Label(master=frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=720, height=100)
+        tk.Label(master=frame, text="Select a Quiz", fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
 
         # quiz options
-        frame = tk.Frame(master=self.window)
-        frame.grid(row=1, column=0)
-
-        self.scroll_bar = tk.Scrollbar(master=frame)
-        self.scroll_bar.pack(side=tk.RIGHT)
+        self.scroll_bar = tk.Scrollbar(master=frame, bg=self.light_blue)
+        self.scroll_bar.place(x=660, y=110, width=30, height=300)
         
-        self.mylist = tk.Listbox(master=frame, yscrollcommand=self.scroll_bar.set)
+        self.mylist = tk.Listbox(master=frame, yscrollcommand=self.scroll_bar.set, font=("Times New Roman", 25))
         for quiz_item in quiz_list:
             self.mylist.insert(tk.END, quiz_item)
-        
-        self.mylist.pack(side=tk.LEFT, fill=tk.BOTH )
+        self.mylist.place(x=80, y=110, width=580,height=300)
+
         self.scroll_bar.config(command = self.mylist.yview )
 
         # confirm button
-        button = tk.Button(master=self.window, text="Confirm")
+        button = tk.Button(master=frame, text="Confirm", fg="white", bg=self.light_blue, font=("Times New Roman", 15))
         button.bind("<Button-1>", self.handle_button)
-        button.grid(row=2, column=0)
+        button.place(x=310,y=430, width=100, height=50)
 
         self.window.mainloop()
 
