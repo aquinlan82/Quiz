@@ -142,7 +142,7 @@ class QuizConfigInterface:
 class QuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
         self.window = tk.Tk()
-        self.window.geometry("720x500")
+        self.window.geometry("720x530")
         self.window.title("Quiz Config Options")
 
         self.quiz_name = quiz_name
@@ -155,9 +155,15 @@ class QuizInterface:
 
         self.index = 0
 
+        self.finished_count = 0
+        self.correct_count = 0
+        self.incorrect_count = 0
+
+        self.phase = "To Answer"
+
 
         # put on frame to use pixel widths
-        self.frame=tk.Frame(self.window, width=720, height=800)
+        self.frame=tk.Frame(self.window, width=720, height=530)
         self.frame.pack()
 
         # header
@@ -169,34 +175,60 @@ class QuizInterface:
         self.qbox.place(x=10,y=100,width=720, height=100)
         self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25))
         self.abox.place(x=10,y=170,width=700, height=60)
-        self.abox.bind("<Return>", self.handle_answer)
+        self.abox.bind("<Return>", self.handle_enter)
+
+        # footer
+        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=490,width=720, height=40)
+        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=495,width=710, height=30)
+        self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.finished_count_label.place(x=10,y=500,width=80, height=20)
+        self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.correct_count_label.place(x=300,y=500,width=80, height=20)
+        self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.incorrect_count_label.place(x=590,y=500,width=100, height=20)
 
 
 
         self.window.mainloop()
 
-    def updateQA(self, used_label1, used_label2=None):
+    def updateQA(self, used_labels):
         self.index += 1
         self.qbox.config(text = self.quiz_df.iloc[self.index]["Axis 1"])
         self.abox.delete(0, tk.END)
 
-        used_label1.destroy()
-        if used_label2:
-            used_label2.destroy()
+        for label in used_labels:
+            label.destroy()
 
-    def handle_answer(self, event):
+        if self.index == len(self.quiz_df):
+            self.window.destroy()
+
+        self.finished_count_label.config(text=str(self.finished_count)+"/"+str(len(self.quiz_df)))
+        self.correct_count_label.config(text="Correct: "+str(self.correct_count))
+        self.incorrect_count_label.config(text="Incorrect: "+str(self.incorrect_count))
+
+    def handle_answer(self):
         if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
-            correct_label = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
-            correct_label.place(x=50,y=260,width=130, height=80)
-            correct_label.after(500, partial(self.updateQA, correct_label))
+            self.finished_count += 1
+            self.correct_count += 1
+
+            correct_label_temp = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
+            correct_label_temp.place(x=50,y=260,width=130, height=80)
+            correct_label_temp.after(500, partial(self.updateQA, [correct_label_temp]))
         else:
-            incorrect_label = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
-            incorrect_label.place(x=50,y=260,width=170, height=80)
+            self.finished_count += 1
+            self.incorrect_count += 1
 
-            answer_label = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
-            answer_label.place(x=250,y=260,width=770, height=80)
+            self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
+            self.incorrect_label_temp.place(x=50,y=260,width=170, height=80)
 
-            button = tk.Button(master=self.frame, text="Confirm", fg="white", bg=self.light_blue, font=("Times New Roman", 15), command=partial(self.updateQA, incorrect_label, answer_label))
-            button.place(x=310,y=400, width=100, height=50)
+            self.answer_label_temp = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
+            self.answer_label_temp.place(x=250,y=260,width=770, height=80)
 
+            self.phase = "To Move On"
 
+    def handle_enter(self, event):
+        if self.phase == "To Answer":
+            self.handle_answer()
+        elif self.phase == "To Move On":
+            self.phase = "To Answer"
+            self.updateQA([self.incorrect_label_temp, self.answer_label_temp])
