@@ -1,0 +1,7 @@
+text -> text
+image -> text
+text + image -> text
+
+
+
+~~~~~~Some sort of learning mode for stuff Im bad at

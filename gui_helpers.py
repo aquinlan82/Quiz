@@ -53,6 +53,7 @@ class QuizConfigInterface:
         self.window.geometry("720x800")
         self.window.title("Quiz Config Options")
 
+        self.misc = quiz_config["misc"]
         self.single_checks = quiz_config['single_check']
         self.grouped_checks = quiz_config['grouped_check']
         self.number_inputs = quiz_config['number_value']
@@ -133,5 +134,5 @@ class QuizConfigInterface:
 
 
         # put in same format as input config
-        self.quiz_config = {"single_check":self.single_checks, "grouped_check":self.grouped_checks, "number_value":self.number_inputs}
+        self.quiz_config = {"misc": self.misc,"single_check":self.single_checks, "grouped_check":self.grouped_checks, "number_value":self.number_inputs}
         self.window.destroy()

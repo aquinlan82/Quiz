@@ -1,4 +1,8 @@
 {
+    "misc": {
+        "type":"text"
+    },
+    
     "single_check": {
         "Reversed?":"False"
     },
@@ -8,7 +12,7 @@
         "Continents": {
             "Africa": "True",
             "Asia": "True",
-            "Australia": "True",
+            "Oceania": "True",
             "Europe": "True",
             "North America": "True",
             "South America": "True"
@@ -17,8 +21,8 @@
 
     "number_value": {
         "Number of Questions?":{
-            "default_val":200,
-            "upper_limit":200,
+            "default_val":197,
+            "upper_limit":197,
             "lower_limit":10
         }
     }
