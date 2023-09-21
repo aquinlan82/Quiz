@@ -1,7 +1,7 @@
 import tkinter as tk
 from functools import partial
 
-# Display First Screen to Select Which Quiz
+# Display first screen to select quiz
 class QuizOptionInterface:
     def __init__(self, quiz_list):
         self.window = tk.Tk()
@@ -46,7 +46,7 @@ class QuizOptionInterface:
         self.selected_quiz_name = self.quiz_list[self.mylist.curselection()[0]]
         self.window.destroy()
         
-
+# Display settings for the chosen quiz
 class QuizConfigInterface:
     def __init__(self, quiz_config):
         self.window = tk.Tk()
@@ -137,13 +137,14 @@ class QuizConfigInterface:
         self.quiz_config = {"misc": self.misc,"single_check":self.single_checks, "grouped_check":self.grouped_checks, "number_value":self.number_inputs}
         self.window.destroy()
 
-
-
+# The quiz itself
 class QuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
+        print(quiz_df)
+
         self.window = tk.Tk()
         self.window.geometry("720x530")
-        self.window.title("Quiz Config Options")
+        self.window.title(quiz_name)
 
         self.quiz_name = quiz_name
         self.quiz_config = quiz_config
@@ -191,21 +192,23 @@ class QuizInterface:
 
         self.window.mainloop()
 
+    # move to next question by deleting feedback widgets and incrementing through df
     def updateQA(self, used_labels):
         self.index += 1
+        if self.index == len(self.quiz_df):
+            self.window.destroy()
+            return
         self.qbox.config(text = self.quiz_df.iloc[self.index]["Axis 1"])
         self.abox.delete(0, tk.END)
 
         for label in used_labels:
             label.destroy()
 
-        if self.index == len(self.quiz_df):
-            self.window.destroy()
-
         self.finished_count_label.config(text=str(self.finished_count)+"/"+str(len(self.quiz_df)))
         self.correct_count_label.config(text="Correct: "+str(self.correct_count))
         self.incorrect_count_label.config(text="Incorrect: "+str(self.incorrect_count))
 
+    # When question is answered, move to next question OR check if correct and add widgets for feedback
     def handle_answer(self):
         if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
             self.finished_count += 1
@@ -226,9 +229,55 @@ class QuizInterface:
 
             self.phase = "To Move On"
 
+    # Enter can be used to trigger two events:
+    #   If a question was just answered it should be checked and setup next screen based on correctness
+    #   If a previous question was wrong then enter is pressed to move to next question
     def handle_enter(self, event):
         if self.phase == "To Answer":
             self.handle_answer()
         elif self.phase == "To Move On":
             self.phase = "To Answer"
             self.updateQA([self.incorrect_label_temp, self.answer_label_temp])
+
+# Display results
+class ResultsInterface:
+    def __init__(self, quiz_results):
+        self.window = tk.Tk()
+        self.window.geometry("720x300")
+        self.window.title("Results")
+
+        self.light_blue = "#34A2FE"
+        self.dark_blue = "#3458EB"
+        self.gold = "#E6C35C"
+
+        self.finished_count = quiz_results.finished_count
+        self.correct_count = quiz_results.correct_count
+
+        # put on frame to use pixel widths
+        frame=tk.Frame(self.window, width=720, height=300)
+        frame.pack()
+
+        # header
+        tk.Label(master=frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=720, height=100)
+        tk.Label(master=frame, text="Results", fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
+
+        # adaptive message
+        perc = self.correct_count / self.finished_count
+        text = "Snarky Message Here"
+        if perc == 1:
+            "Perfect Score!"
+        elif perc > 0.9:
+            text = "Nice :)"
+        elif perc > 0.7:
+            text = "Meh"
+        elif perc > 0.5:
+            text = "... You Tried"
+        else:
+            text = "That's rough, buddy"
+        tk.Label(master=frame, text=text, fg="black",font=("Times New Roman", 25)).place(x=10,y=100,width=700, height=80)
+
+        # score
+        tk.Label(master=frame, text=str(self.correct_count) + "/" + str(self.finished_count), fg="black",font=("Times New Roman", 25)).place(x=10,y=200,width=700, height=80)
+
+
+        self.window.mainloop()

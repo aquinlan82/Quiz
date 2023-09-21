@@ -13,4 +13,6 @@ quiz_config = QuizConfigInterface(quiz_config).quiz_config
 # quiz_config = {'misc': {'type': 'text'}, 'single_check': {'Reversed?': 'False'}, 'grouped_check': {'Continents': {'Africa': 'True', 'Asia': 'True', 'Oceania': 'True', 'Europe': 'True', 'North America': 'True', 'South America': 'True'}}, 'number_value': {'Number of Questions?': '197'}}
 
 quiz_df = get_quiz(quiz_name, quiz_config)
-QuizInterface(quiz_name, quiz_config, quiz_df)
+finished_quiz_data = QuizInterface(quiz_name, quiz_config, quiz_df)
+
+ResultsInterface(finished_quiz_data)
