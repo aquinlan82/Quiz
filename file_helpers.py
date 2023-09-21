@@ -13,13 +13,11 @@ def read_quiz_config(quiz_name):
     return config
 
 def get_quiz(quiz_name, quiz_config):
-    if quiz_config["misc"]["type"] == "text":
-        axes  = pd.read_csv("data/" + quiz_name + "/data.csv")
-        reversed = reverse_axes(quiz_config, axes)
-        filtered = filter_axes(quiz_config, reversed)
-        random = randomize_axes(quiz_config, filtered)
-        print(random)
-        return random
+    axes  = pd.read_csv("data/" + quiz_name + "/data.csv")
+    reversed = reverse_axes(quiz_config, axes)
+    filtered = filter_axes(quiz_config, reversed)
+    random = randomize_axes(quiz_config, filtered)
+    return random
 
 
 def reverse_axes(quiz_config, axes):

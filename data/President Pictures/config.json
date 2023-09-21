@@ -1,0 +1,35 @@
+{
+    "misc": {
+        "type":"text"
+    },
+    
+    "single_check": {
+        
+    },
+    
+    "grouped_check": {
+    
+        "Centuries": {
+            "1700s": "True",
+            "1800s": "True",
+            "1900s": "True",
+            "2000s": "True"
+        },
+        "Numbers": {
+            "0-10": "True",
+            "10-20": "True",
+            "20-30": "True",
+            "30-40": "True",
+            "40-46": "True"
+        }
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":45,
+            "upper_limit":45,
+            "lower_limit":5
+        }
+    }
+    
+}

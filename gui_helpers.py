@@ -136,3 +136,67 @@ class QuizConfigInterface:
         # put in same format as input config
         self.quiz_config = {"misc": self.misc,"single_check":self.single_checks, "grouped_check":self.grouped_checks, "number_value":self.number_inputs}
         self.window.destroy()
+
+
+
+class QuizInterface:
+    def __init__(self, quiz_name, quiz_config, quiz_df):
+        self.window = tk.Tk()
+        self.window.geometry("720x500")
+        self.window.title("Quiz Config Options")
+
+        self.quiz_name = quiz_name
+        self.quiz_config = quiz_config
+        self.quiz_df = quiz_df
+
+        self.light_blue = "#34A2FE"
+        self.dark_blue = "#3458EB"
+        self.gold = "#E6C35C"
+
+        self.index = 0
+
+
+        # put on frame to use pixel widths
+        self.frame=tk.Frame(self.window, width=720, height=800)
+        self.frame.pack()
+
+        # header
+        tk.Label(master=self.frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=720, height=100)
+        tk.Label(master=self.frame, text=quiz_name, fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
+
+        # Q and A
+        self.qbox = tk.Label(master=self.frame, text = self.quiz_df.iloc[self.index]["Axis 1"], font=("Times New Roman", 25), anchor="w")
+        self.qbox.place(x=10,y=100,width=720, height=100)
+        self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25))
+        self.abox.place(x=10,y=170,width=700, height=60)
+        self.abox.bind("<Return>", self.handle_answer)
+
+
+
+        self.window.mainloop()
+
+    def updateQA(self, used_label1, used_label2=None):
+        self.index += 1
+        self.qbox.config(text = self.quiz_df.iloc[self.index]["Axis 1"])
+        self.abox.delete(0, tk.END)
+
+        used_label1.destroy()
+        if used_label2:
+            used_label2.destroy()
+
+    def handle_answer(self, event):
+        if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
+            correct_label = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
+            correct_label.place(x=50,y=260,width=130, height=80)
+            correct_label.after(500, partial(self.updateQA, correct_label))
+        else:
+            incorrect_label = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
+            incorrect_label.place(x=50,y=260,width=170, height=80)
+
+            answer_label = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
+            answer_label.place(x=250,y=260,width=770, height=80)
+
+            button = tk.Button(master=self.frame, text="Confirm", fg="white", bg=self.light_blue, font=("Times New Roman", 15), command=partial(self.updateQA, incorrect_label, answer_label))
+            button.place(x=310,y=400, width=100, height=50)
+
+
