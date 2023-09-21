@@ -21,12 +21,13 @@ def get_quiz(quiz_name, quiz_config):
 
 
 def reverse_axes(quiz_config, axes):
-    if quiz_config["single_check"]["Reversed?"] == "True":
-        axes["Temp"] = axes["Axis 2"]
-        axes["Axis 2"] = axes["Axis 1"]
-        axes["Axis 1"] = axes["Temp"]
-        axes.drop(columns="Temp")
-        return axes
+    if "Reversed?" in quiz_config["single_check"]:
+        if quiz_config["single_check"]["Reversed?"] == "True":
+            axes["Temp"] = axes["Axis 2"]
+            axes["Axis 2"] = axes["Axis 1"]
+            axes["Axis 1"] = axes["Temp"]
+            axes.drop(columns="Temp")
+            return axes
     return axes
 
 def filter_axes(quiz_config, axes):
@@ -40,18 +41,4 @@ def randomize_axes(quiz_config, axes):
     axes = axes.sample(n=min(int(count), len(axes)))
     return axes
 
-
-def read_image_quiz(foldername, filename):
-    f = open("data/" + foldername + "/" + filename)
-    out = f.readlines()
-
-    q_image_mapping = {}
-
-    for qa in out:
-        pair_list = qa.split("  ")
-        q = pair_list[0].strip()
-        a = pair_list[1].strip()
-        q_image_mapping[q] = a
-
-    return q_image_mapping
 

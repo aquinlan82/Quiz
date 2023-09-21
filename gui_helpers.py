@@ -1,5 +1,6 @@
 import tkinter as tk
 from functools import partial
+from PIL import ImageTk, Image  
 
 # Display first screen to select quiz
 class QuizOptionInterface:
@@ -138,7 +139,7 @@ class QuizConfigInterface:
         self.window.destroy()
 
 # The quiz itself
-class QuizInterface:
+class TextQuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
         print(quiz_df)
 
@@ -200,6 +201,112 @@ class QuizInterface:
             return
         self.qbox.config(text = self.quiz_df.iloc[self.index]["Axis 1"])
         self.abox.delete(0, tk.END)
+
+        for label in used_labels:
+            label.destroy()
+
+        self.finished_count_label.config(text=str(self.finished_count)+"/"+str(len(self.quiz_df)))
+        self.correct_count_label.config(text="Correct: "+str(self.correct_count))
+        self.incorrect_count_label.config(text="Incorrect: "+str(self.incorrect_count))
+
+    # When question is answered, move to next question OR check if correct and add widgets for feedback
+    def handle_answer(self):
+        if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
+            self.finished_count += 1
+            self.correct_count += 1
+
+            correct_label_temp = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
+            correct_label_temp.place(x=50,y=260,width=130, height=80)
+            correct_label_temp.after(500, partial(self.updateQA, [correct_label_temp]))
+        else:
+            self.finished_count += 1
+            self.incorrect_count += 1
+
+            self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
+            self.incorrect_label_temp.place(x=50,y=260,width=170, height=80)
+
+            self.answer_label_temp = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
+            self.answer_label_temp.place(x=250,y=260,width=770, height=80)
+
+            self.phase = "To Move On"
+
+    # Enter can be used to trigger two events:
+    #   If a question was just answered it should be checked and setup next screen based on correctness
+    #   If a previous question was wrong then enter is pressed to move to next question
+    def handle_enter(self, event):
+        if self.phase == "To Answer":
+            self.handle_answer()
+        elif self.phase == "To Move On":
+            self.phase = "To Answer"
+            self.updateQA([self.incorrect_label_temp, self.answer_label_temp])
+
+class ImageQuizInterface:
+    def __init__(self, quiz_name, quiz_config, quiz_df):
+        self.window = tk.Tk()
+        self.window.geometry("720x530")
+        self.window.title(quiz_name)
+
+        self.quiz_name = quiz_name
+        self.quiz_config = quiz_config
+        self.quiz_df = quiz_df
+
+        self.light_blue = "#34A2FE"
+        self.dark_blue = "#3458EB"
+        self.gold = "#E6C35C"
+
+        self.index = 0
+
+        self.finished_count = 0
+        self.correct_count = 0
+        self.incorrect_count = 0
+
+        self.phase = "To Answer"
+
+
+        # put on frame to use pixel widths
+        self.frame=tk.Frame(self.window, width=720, height=530)
+        self.frame.pack()
+
+        # header
+        tk.Label(master=self.frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=720, height=100)
+        tk.Label(master=self.frame, text=quiz_name, fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
+
+        # Q and A
+        path = "data/"+quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
+        flag_img = ImageTk.PhotoImage(Image.open(path)) 
+        self.qbox = tk.Label(self.frame, image = flag_img)
+        self.qbox.place(x=10,y=120,width=700, height=250)
+
+        self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25))
+        self.abox.place(x=10,y=380,width=700, height=60)
+        self.abox.bind("<Return>", self.handle_enter)
+
+        # footer
+        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=490,width=720, height=40)
+        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=495,width=710, height=30)
+        self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.finished_count_label.place(x=10,y=500,width=80, height=20)
+        self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.correct_count_label.place(x=300,y=500,width=80, height=20)
+        self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
+        self.incorrect_count_label.place(x=590,y=500,width=100, height=20)
+
+
+
+        self.window.mainloop()
+
+    # move to next question by deleting feedback widgets and incrementing through df
+    def updateQA(self, used_labels):
+        self.index += 1
+        if self.index == len(self.quiz_df):
+            self.window.destroy()
+            return
+        self.abox.delete(0, tk.END)
+
+        path = "data/"+self.quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
+        flag_img = ImageTk.PhotoImage(Image.open(path)) 
+        self.qbox.config(image=flag_img)
+        self.qbox.image = flag_img
 
         for label in used_labels:
             label.destroy()

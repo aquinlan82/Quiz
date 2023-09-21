@@ -1,0 +1,198 @@
+Axis 1,Axis 2,Capital,Currency,Currency Name,Continents
+af.png,Afghanistan,Kabul,AFN,Afghan afghani,Asia
+al.png,Albania,Tirana,ALL,Albanian lek,Europe
+dz.png,Algeria,Algiers,DZD,Algerian dinar,Africa
+ad.png,Andorra,Andorra la Vella,EUR,Euro,Europe
+ao.png,Angola,Luanda,AOA,Angolan kwanza,Africa
+ag.png,Antigua and Barbuda,St. John's,XCD,Eastern Caribbean dollar,North America
+ar.png,Argentina,Buenos Aires,ARS,Argentine peso,South America
+am.png,Armenia,Yerevan,AMD,Armenian dram,Asia
+au.png,Australia,Canberra,AUD,Australian dollar,Oceania
+at.png,Austria,Vienna,EUR,Euro,Europe
+az.png,Azerbaijan,Baku,AZN,Azerbaijani manat,Asia
+bs.png,Bahamas,Nassau,BSD,Bahamian dollar,North America
+bh.png,Bahrain,Manama,BHD,Bahraini dinar,Asia
+bd.png,Bangladesh,Dhaka,BDT,Bangladeshi taka,Asia
+bb.png,Barbados,Bridgetown,BBD,Barbadian dollar,North America
+by.png,Belarus,Minsk,BYN,Belarusian ruble,Europe
+be.png,Belgium,Brussels,EUR,Euro,Europe
+bz.png,Belize,Belmopan,BZD,Belize dollar,North America
+bj.png,Benin,Porto-Novo,XOF,West African CFA franc,Africa
+bt.png,Bhutan,Thimphu,BTN,Bhutanese ngultrum,Asia
+bo.png,Bolivia,Sucre,BOB,Bolivian boliviano,South America
+ba.png,Bosnia and Herzegovina,Sarajevo,BAM,Bosnia and Herzegovina convertible mark,Europe
+bw.png,Botswana,Gaborone,BWP,Botswana pula,Africa
+br.png,Brazil,Brasilia,BRL,Brazilian real,South America
+bn.png,Brunei,Bandar Seri Begawan,BND,Brunei dollar,Asia
+bg.png,Bulgaria,Sofia,BGN,Bulgarian lev,Europe
+bf.png,Burkina Faso,Ouagadougou,XOF,West African CFA franc,Africa
+bi.png,Burundi,Bujumbura,BIF,Burundian franc,Africa
+kh.png,Cambodia,Phnom Penh,KHR,Cambodian riel,Asia
+cm.png,Cameroon,Yaounde,XAF,Central African CFA franc,Africa
+ca.png,Canada,Ottawa,CAD,Canadian dollar,North America
+cv.png,Cape Verde,Praia,CVE,Cape Verdean escudo,Africa
+cf.png,CAR,Bangui,XAF,Central African CFA franc,Africa
+td.png,Chad,N'Djamena,XAF,Central African CFA franc,Africa
+cl.png,Chile,Santiago,CLP,Chilean peso,South America
+cn.png,China,Beijing,CNY,Chinese yuan,Asia
+co.png,Colombia,BogotÃ¡,COP,Colombian peso,South America
+km.png,Comoros,Moroni,KMF,Comorian franc,Africa
+cg.png,Congo,Brazzaville,XAF,Central African CFA franc,Africa
+cr.png,Costa Rica,San Jose,CRC,Costa Rican colÃ³n,North America
+ci.png,Cote d'Ivoire,Yamoussoukro,XOF,West African CFA franc,Africa
+hr.png,Croatia,Zagreb,HRK,Croatian kuna,Europe
+cu.png,Cuba,Havana,CUP,Cuban peso,North America
+cy.png,Cyprus,Nicosia,EUR,Euro,Europe
+cz.png,Czechia,Prague,CZK,Czech koruna,Europe
+cd.png,Dem Rep Congo,Kinshasa,CDF,Congolese Franc,Africa
+dk.png,Denmark,Copenhagen,DKK,Danish krone,Europe
+dj.png,Djibouti,Djibouti,DJF,Djiboutian franc,Africa
+dm.png,Dominica,Roseau,XCD,Eastern Caribbean dollar,North America
+do.png,Dominican Republic,Santo Domingo,DOP,Dominican peso,North America
+tl.png,East Timor,Dili,USD,United States dollar,Asia
+ec.png,Ecuador,Quito,USD,United States dollar,South America
+eg.png,Egypt,Cairo,EGP,Egyptian pound,Africa
+sv.png,El Salvador,San Salvador,USD,United States dollar,North America
+gq.png,Equatorial Guinea,Malabo,XAF,Central African CFA franc,Africa
+er.png,Eritrea,Asmara,ERN,Eritrean nakfa,Africa
+ee.png,Estonia,Tallinn,EUR,Euro,Europe
+sz.png,Eswatini,Mbabane,SZL,Lilangeni,Africa
+et.png,Ethiopia,Addis Ababa,ETB,Ethiopian birr,Africa
+fj.png,Fiji,Suva,FJD,Fijian dollar,Oceania
+fi.png,Finland,Helsinki,EUR,Euro,Europe
+fr.png,France,Paris,EUR,Euro,Europe
+ga.png,Gabon,Libreville,XAF,Central African CFA franc,Africa
+gm.png,Gambia,Banjul,GMD,Gambian dalasi,Africa
+ge.png,Georgia,Tbilisi,GEL,Georgian lari,Asia
+de.png,Germany,Berlin,EUR,Euro,Europe
+gh.png,Ghana,Accra,GHS,Ghanaian cedi,Africa
+gr.png,Greece,Athens,EUR,Euro,Europe
+gd.png,Grenada,St. George's,XCD,Eastern Caribbean dollar,North America
+gt.png,Guatemala,Guatemala City,GTQ,Guatemalan quetzal,North America
+gn.png,Guinea,Conakry,GNF,Guinean franc,Africa
+gw.png,Guinea Bissau,Bissau,XOF,West African CFA franc,Africa
+gy.png,Guyana,Georgetown,GYD,Guyanese dollar,South America
+ht.png,Haiti,Port-au-Prince,HTG,Haitian gourde,North America
+hn.png,Honduras,Tegucigalpa,HNL,Honduran lempira,North America
+hu.png,Hungary,Budapest,HUF,Hungarian forint,Europe
+is.png,Iceland,Reykjavik,ISK,Icelandic krÃ³na,Europe
+in.png,India,New Delhi,INR,Indian rupee,Asia
+id.png,Indonesia,Jakarta,IDR,Indonesian rupiah,Asia
+ir.png,Iran,Tehran,IRR,Iranian rial,Asia
+iq.png,Iraq,Baghdad,IQD,Iraqi dinar,Asia
+ie.png,Ireland,Dublin,EUR,Euro,Europe
+il.png,Israel,Jerusalem,ILS,Israeli new shekel,Asia
+it.png,Italy,Rome,EUR,Euro,Europe
+jm.png,Jamaica,Kingston,JMD,Jamaican dollar,North America
+jp.png,Japan,Tokyo,JPY,Japanese yen,Asia
+jo.png,Jordan,Amman,JOD,Jordanian dinar,Asia
+kz.png,Kazakhstan,Astana,KZT,Kazakhstani tenge,Asia
+ke.png,Kenya,Nairobi,KES,Kenyan shilling,Africa
+ki.png,Kiribati,Tarawa,AUD,Australian dollar,Oceania
+xk.png,Kosovo,Pristina,EUR,Euro,Europe
+kw.png,Kuwait,Kuwait City,KWD,Kuwaiti dinar,Asia
+kg.png,Kyrgyzstan,Bishkek,KGS,Kyrgyzstani som,Asia
+la.png,Laos,Vientiane,LAK,Lao kip,Asia
+lv.png,Latvia,Riga,EUR,Euro,Europe
+lb.png,Lebanon,Beirut,LBP,Lebanese pound,Asia
+ls.png,Lesotho,Maseru,LSL,Lesotho loti,Africa
+lr.png,Liberia,Monrovia,LRD,Liberian dollar,Africa
+ly.png,Libya,Tripolis,LYD,Libyan dinar,Africa
+li.png,Liechtenstein,Vaduz,CHF,Swiss franc,Europe
+lt.png,Lithuania,Vilnius,EUR,Euro,Europe
+lu.png,Luxembourg,Luxembourg,EUR,Euro,Europe
+mk.png,Macedonia,Skopje,MKD,Denar,Europe
+mg.png,Madagascar,Antananarivo,MGA,Malagasy ariary,Africa
+mw.png,Malawi,Lilongwe,MWK,Malawian kwacha,Africa
+my.png,Malaysia,Kuala Lumpur,MYR,Malaysian ringgit,Asia
+mv.png,Maldives,Male,MVR,Maldivian rufiyaa,Asia
+ml.png,Mali,Bamako,XOF,West African CFA franc,Africa
+mt.png,Malta,Valletta,EUR,Euro,Europe
+mh.png,Marshall Islands,Majuro,USD,United States dollar,Oceania
+mr.png,Mauritania,Nouakchott,MRO,Mauritanian ouguiya,Africa
+mu.png,Mauritius,Port Louis,MUR,Mauritian rupee,Africa
+mx.png,Mexico,Ciudad de MÃ©xico,MXN,Mexican peso,North America
+fm.png,Micronesia,Palikir,USD,United States dollar,Oceania
+md.png,Moldova,Chisinau,MDL,Moldovan leu,Europe
+mc.png,Monaco,Monaco,EUR,Euro,Europe
+mn.png,Mongolia,Ulan Bator,MNT,Mongolian tÃ¶grÃ¶g,Asia
+me.png,Montenegro,Podgorica,EUR,Euro,Europe
+ma.png,Morocco,Rabat,MAD,Moroccan dirham,Africa
+mz.png,Mozambique,Maputo,MZN,Mozambican metical,Africa
+mm.png,Myanmar,Nay Pyi Taw,MMK,Burmese kyat,Asia
+na.png,Namibia,Windhoek,NAD,Namibian dollar,Africa
+nr.png,Nauru,Yaren,AUD,Australian dollar,Oceania
+np.png,Nepal,Kathmandu,NPR,Nepalese rupee,Asia
+nl.png,Netherlands,Amsterdam,EUR,Euro,Europe
+nz.png,New Zealand,Wellington,NZD,New Zealand dollar,Oceania
+ni.png,Nicaragua,Managua,NIO,Nicaraguan cÃ³rdoba,North America
+ne.png,Niger,Niamey,XOF,West African CFA franc,Africa
+ng.png,Nigeria,Abuja,NGN,Nigerian naira,Africa
+kp.png,North Korea,Pyongyang,KPW,North Korean Won,Asia
+no.png,Norway,Oslo,NOK,Norwegian krone,Europe
+om.png,Oman,Muscat,OMR,Omani rial,Asia
+pk.png,Pakistan,Islamabad,PKR,Pakistani rupee,Asia
+pw.png,Palau,Melekeok,USD,United States dollar,Oceania
+ps.png,Palestine,East Jerusalem,ILS,Israeli new shekel,Asia
+pa.png,Panama,Panama City,PAB,Panamanian balboa,North America
+pg.png,Papua New Guinea,Port Moresby,PGK,Papua New Guinean kina,Oceania
+py.png,Paraguay,Asuncion,PYG,Paraguayan guarani,South America
+pe.png,Peru,Lima,PEN,Peruvian sol,South America
+ph.png,Philippines,Manila,PHP,Philippine peso,Asia
+pl.png,Poland,Warsaw,PLN,Polish zÅ‚oty,Europe
+pt.png,Portugal,Lisbon,EUR,Euro,Europe
+qa.png,Qatar,Doha,QAR,Qatari riyal,Asia
+ro.png,Romania,Bucharest,RON,Romanian leu,Europe
+ru.png,Russia,Moscow,RUB,Russian ruble,Europe
+rw.png,Rwanda,Kigali,RWF,Rwandan franc,Africa
+kn.png,Saint Kitts and Nevis,Basseterre,XCD,Eastern Caribbean dollar,North America
+lc.png,Saint Lucia,Castries,XCD,Eastern Caribbean dollar,North America
+vc.png,Saint Vincent and the Grenadines,Kingstown,XCD,Eastern Caribbean dollar,North America
+ws.png,Samoa,Apia,WST,Samoan tÄlÄ,Oceania
+sm.png,San Marino,San Marino,EUR,Euro,Europe
+st.png,Sao Tome and Principe,Sao Tome,STD,Dobra,Africa
+sa.png,Saudi Arabia,Riyadh,SAR,Saudi riyal,Asia
+sn.png,Senegal,Dakar,XOF,West African CFA franc,Africa
+rs.png,Serbia,Belgrade,RSD,Serbian dinar,Europe
+sc.png,Seychelles,Victoria,SCR,Seychellois rupee,Africa
+sl.png,Sierra Leone,Freetown,SLL,Sierra Leonean leone,Africa
+sg.png,Singapore,Singapur,SGD,Singapore dollar,Asia
+sk.png,Slovakia,Bratislava,EUR,Euro,Europe
+si.png,Slovenia,Ljubljana,EUR,Euro,Europe
+sb.png,Solomon Islands,Honiara,SBD,Solomon Islands dollar,Oceania
+so.png,Somalia,Mogadishu,SOS,Somali shilling,Africa
+za.png,South Africa,Pretoria,ZAR,South African rand,Africa
+kr.png,South Korea,Seoul,KRW,Won,Asia
+ss.png,South Sudan,Juba,SSP,South Sudanese pound,Africa
+es.png,Spain,Madrid,EUR,Euro,Europe
+lk.png,Sri Lanka,Colombo,LKR,Sri Lankan rupee,Asia
+sd.png,Sudan,Khartoum,SDG,Sudanese pound,Africa
+sr.png,Suriname,Paramaribo,SRD,Surinamese dollar,South America
+se.png,Sweden,Stockholm,SEK,Swedish krona,Europe
+ch.png,Switzerland,Bern,CHF,Swiss franc,Europe
+sy.png,Syria,Damascus,SYP,Syrian pound,Asia
+tw.png,Taiwan,Taipei,TWD,New Taiwan dollar,Asia
+tj.png,Tajikistan,Dushanbe,TJS,Tajikistani somoni,Asia
+tz.png,Tanzania,Dodoma,TZS,Tanzanian shilling,Africa
+th.png,Thailand,Bangkok,THB,Thai baht,Asia
+tg.png,Togo,Lome,XOF,West African CFA franc,Africa
+to.png,Tonga,Nuku'alofa,TOP,Tongan paÊ»anga,Oceania
+tt.png,Trinidad and Tobago,Port of Spain,TTD,Trinidad and Tobago dollar,North America
+tn.png,Tunisia,Tunis,TND,Tunisian dinar,Africa
+tr.png,Turkey,Ankara,TRY,Turkish lira,Asia
+tm.png,Turkmenistan,Ashgabat,TMT,Turkmenistan manat,Asia
+tv.png,Tuvalu,Funafuti,AUD,Australian dollar,Oceania
+ug.png,Uganda,Kampala,UGX,Ugandan shilling,Africa
+gb.png,UK,London,GBP,British pound,Europe
+ua.png,Ukraine,Kiev,UAH,Ukrainian hryvnia,Europe
+ae.png,United Arab Emirates,Abu Dhabi,AED,United Arab Emirates dirham,Asia
+uy.png,Uruguay,Montevideo,UYU,Uruguayan peso,South America
+us.png,US,Washington,USD,United States dollar,North America
+uz.png,Uzbekistan,Tashkent,UZS,Uzbekistani soÊ»m,Asia
+vu.png,Vanuatu,Port Vila,VUV,Vanuatu vatu,Oceania
+va.png,Vatican City,Vatican City,EUR,Euro,Europe
+ve.png,Venezuela,Caracas,VEF,BolÃ­var,South America
+vn.png,Vietnam,Hanoi,VND,Vietnamese Ä‘á»“ng,Asia
+ye.png,Yemen,Sanaa,YER,Yemeni rial,Asia
+zm.png,Zambia,Lusaka,ZMW,Zambian kwacha,Africa
+zw.png,Zimbabwe,Harare,ZWL,Zimbabwe Dollar,Africa
