@@ -1,12 +1,13 @@
 
 import json
+import os
 
 def read_quiz_options():
-    return ["Capitals", "Presidental Pictures","smth","idk","item","dogy","piggy", "fob","lol","1","2","3","4","5","6"]
-
+    dir_list = os.listdir("data")
+    return dir_list
 
 def read_quiz_config(quiz_name):
-    f = open('data/capitals/capitals_config.json')
+    f = open('data/'+ quiz_name + '/config.json')
     config = json.load(f)
     return config
 
