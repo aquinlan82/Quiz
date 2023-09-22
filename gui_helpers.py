@@ -8,6 +8,7 @@ class QuizOptionInterface:
         self.window = tk.Tk()
         self.window.geometry("720x500")
         self.window.title("Select Quiz")
+        self.window.bind("<Return>", self.handle_button)
 
         self.quiz_list = quiz_list
         self.selected_quiz_name = None 
@@ -32,6 +33,7 @@ class QuizOptionInterface:
         for quiz_item in quiz_list:
             self.mylist.insert(tk.END, quiz_item)
         self.mylist.place(x=80, y=110, width=580,height=300)
+        self.mylist.bind("<Double-1>", self.handle_button)
 
         self.scroll_bar.config(command = self.mylist.yview )
 
@@ -53,6 +55,7 @@ class QuizConfigInterface:
         self.window = tk.Tk()
         self.window.geometry("720x830")
         self.window.title("Quiz Config Options")
+        self.window.bind("<Return>", self.handle_button)
 
         self.misc = quiz_config["misc"]
         self.single_checks = quiz_config['single_check']
@@ -211,7 +214,7 @@ class TextQuizInterface:
 
     # When question is answered, move to next question OR check if correct and add widgets for feedback
     def handle_answer(self):
-        if self.abox.get() == str(self.quiz_df.iloc[self.index]["Axis 2"]):
+        if str.lower(self.abox.get()) == str.lower(str(self.quiz_df.iloc[self.index]["Axis 2"])):
             self.finished_count += 1
             self.correct_count += 1
 

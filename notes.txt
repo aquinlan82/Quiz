@@ -1,10 +1,22 @@
+pyinstaller -F runme.py
 
-~~~~~~Some sort of learning mode for stuff Im bad at
+
 ~~~~~~Button to show image hint in text only quizzes
 
 
 TODO
 Territory Flags
-Territory Locations
-Country Locations
 State Flags
+
+
+
+# given a static map type country name - image might be zoomed in on continent
+Territory Locations - shown image    # none are countries
+Country Locations - shown image      # all are countries
+Island Locations - shown image       # mixed, as long as its an island
+
+
+# given a country chose part of the world to zoom in on and then choose country
+Territory Locations - click map
+Country Locations - click map
+Island Locations - click map
