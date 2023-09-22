@@ -1,7 +1,10 @@
-text -> text
-image -> text
-text + image -> text
-
-
 
 ~~~~~~Some sort of learning mode for stuff Im bad at
+~~~~~~Button to show image hint in text only quizzes
+
+
+TODO
+Territory Flags
+Territory Locations
+Country Locations
+State Flags

@@ -1,0 +1,26 @@
+{
+    "misc": {
+        "type":"text"
+    },
+    
+    "single_check": {
+        
+    },
+    
+    "grouped_check": {
+    
+        "Start Char": {
+            "dot": "True",
+            "dash": "True"
+        }
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":26,
+            "upper_limit":26,
+            "lower_limit":5
+        }
+    }
+    
+}

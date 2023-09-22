@@ -1,0 +1,37 @@
+{
+    "misc": {
+        "type":"text"
+    },
+    
+    "single_check": {
+        "Reversed?":"False"
+    },
+    
+    "grouped_check": {
+    
+        "Numbers": {
+            "1-10": "True",
+            "11-20": "True",
+            "21-30": "True",
+            "31-40": "True",
+            "41-50": "True",
+            "51-60": "True",
+            "61-70": "True",
+            "71-80": "True",
+            "81-90": "True",
+            "91-100": "True",
+            "101-110": "True",
+            "111-120": "True"
+        }
+        
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":118,
+            "upper_limit":118,
+            "lower_limit":10
+        }
+    }
+    
+}

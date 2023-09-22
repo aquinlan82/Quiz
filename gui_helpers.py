@@ -51,7 +51,7 @@ class QuizOptionInterface:
 class QuizConfigInterface:
     def __init__(self, quiz_config):
         self.window = tk.Tk()
-        self.window.geometry("720x800")
+        self.window.geometry("720x830")
         self.window.title("Quiz Config Options")
 
         self.misc = quiz_config["misc"]
@@ -71,7 +71,7 @@ class QuizConfigInterface:
         self.pady = 10
 
         # put on frame to use pixel widths
-        frame=tk.Frame(self.window, width=720, height=800)
+        frame=tk.Frame(self.window, width=720, height=830)
         frame.pack()
 
         # header
@@ -211,7 +211,7 @@ class TextQuizInterface:
 
     # When question is answered, move to next question OR check if correct and add widgets for feedback
     def handle_answer(self):
-        if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
+        if self.abox.get() == str(self.quiz_df.iloc[self.index]["Axis 2"]):
             self.finished_count += 1
             self.correct_count += 1
 
@@ -322,17 +322,17 @@ class ImageQuizInterface:
             self.correct_count += 1
 
             correct_label_temp = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
-            correct_label_temp.place(x=50,y=260,width=130, height=80)
+            correct_label_temp.place(x=50,y=450,width=130, height=30)
             correct_label_temp.after(500, partial(self.updateQA, [correct_label_temp]))
         else:
             self.finished_count += 1
             self.incorrect_count += 1
 
             self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
-            self.incorrect_label_temp.place(x=50,y=260,width=170, height=80)
+            self.incorrect_label_temp.place(x=50,y=450,width=130, height=30)
 
             self.answer_label_temp = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
-            self.answer_label_temp.place(x=250,y=260,width=770, height=80)
+            self.answer_label_temp.place(x=300,y=450,width=700, height=30)
 
             self.phase = "To Move On"
 
