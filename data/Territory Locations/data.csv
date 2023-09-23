@@ -1,49 +1,51 @@
-Island,Controlled by ,Physical Region
-American Samoa,US,Oceania - next to samoa
-Anguilla,UK,Caribbean - above St kitts
-Aruba,Netherlands,Above Venezuela
-Bermuda,UK,Way east of south carolina
-Bouvet Island,,
-British Indian Ocean Territory,UK,below maldives
-British Virgin Islands,UK,Caribbean - East of DR
-Cayman Islands,UK,Caribbean - south of cuba
-Christmas Island,Australia,South of Indonesia
-Cocos Islands,,
-Cook Islands,New Zealand,Oceania
-Falkland Islands,UK,East of southern argentina
-French Guiana,France,
-French Polynesia,France,Oceania
-French Southern Territories,,
-Gaza Strip,,
-Gibraltar,UK,Spain
-Guadeloupe,France,
-Guam,US,Oceania - east of philippines
-Guernsey,UK,English channel
-Heard and McDonald Islands,,
-Hong Kong,China,south east part of china
-Isle of Man,UK,between uk and ireland
-Jersey,UK,English channel
-Macau,China,south east part of china
-Martinique,,
-Mayotte,France,north of madagascar
-Montserrat,UK,Caribbean - south of st kitts
-Netherlands Antilles,Netherlands,Caribean - mostly just above colombia
-New Caledonia,,
-Niue,New Zealand,Oceania
-Norfolk Island,Australia,east of australia
-Northern Mariana Islands,US,Oceania - east of philippines
-Pitcairn Islands,UK,Oceania
-Puerto Rico,US,East of DR
-Reunion,,
-St Helena,UK,In the arch of africa
-St Pierre and Miquelon,France,In south east canada
-South Georgia and South Sandwich Islands,UK,east of falklands
-Svalbard and Jan Mayen,,
-Tokelau,,
-Turks and Caicos Islands,UK,north of DR
-Virgin Islands,US,East of DR
-Wallis and Futuna,France,Oceania
-Western Sahara,,
-Faroe Islands,,
-Greenland,,
-US Virgin Islands,,
+Axis 1,Axis 2,Controlled by,Physical Region
+American Samoa.jpg,American Samoa,US,Oceania
+Anguilla.jpg,Anguilla,UK,Carribbean
+Aruba.png,Aruba,Netherlands,North America
+Bermuda.png,Bermuda,UK,North America
+Bouvet Island.png,Bouvet Island,,Afro Europe
+British Indian Ocean Territory.png,British Indian Ocean Territory,UK,Afro Europe
+British Virgin Islands.jpg,British Virgin Islands,UK,Carribbean
+Cayman Islands.png,Cayman Islands,UK,North America
+Christmas Island.png,Christmas Island,Australia,Australia
+Cocos Islands.png,Cocos Islands,,Australia
+Cook Islands.jpg,Cook Islands,New Zealand,Oceania
+Falkland Islands.png,Falkland Islands,UK,North America
+French Guiana.png,French Guiana,France,North America
+French Polynesia.jpg,French Polynesia,France,Oceania
+French Southern Territories.png,French Southern Territories,,Afro Europe
+Gaza Strip.png,Gaza Strip,,Afro Europe
+Gibraltar.png,Gibraltar,UK,Afro Europe
+Guadeloupe.jpg,Guadeloupe,France,Carribbean
+Guam.jpg,Guam,US,Oceania
+Guernsey.png,Guernsey,UK,Afro Europe
+Heard and McDonald Islands.png,Heard and McDonald Islands,,Afro Europe
+Hong Kong.png,Hong Kong,China,Australia
+Isle of Man.png,Isle of Man,UK,Afro Europe
+Jersey.png,Jersey,UK,Afro Europe
+Macau.png,Macau,China,Australia
+Martinique.jpg,Martinique,,Carribbean
+Mayotte.png,Mayotte,France,Afro Europe
+Montserrat.jpg,Montserrat,UK,Carribbean
+Netherlands Antilles.png,Netherlands Antilles,Netherlands,North America
+New Caledonia.jpg,New Caledonia,,Oceania
+Niue.jpg,Niue,New Zealand,Oceania
+Norfolk Island.png,Norfolk Island,Australia,Australia
+Northern Mariana Islands.jpg,Northern Mariana Islands,US,Oceania
+Pitcairn Islands.jpg,Pitcairn Islands,UK,Oceania
+Puerto Rico.jpg,Puerto Rico,US,Carribbean
+Reunion.png,Reunion,,Afro Europe
+St. Helena.png,St Helena,UK,Afro Europe
+St. Pierre and Miquelon.png,St Pierre and Miquelon,France,North America
+South Georgia and South Sandwich Islands.png,South Georgia and South Sandwich Islands,UK,North America
+Svalbard and Jan Mayen.png,Svalbard and Jan Mayen,,Afro Europe
+Tokelau.jpg,Tokelau,,Oceania
+Turks and Caicos Islands.jpg,Turks and Caicos Islands,UK,Australia
+US Virgin Islands.jpg,US Virgin Islands,US,Carribbean
+Wallis and Futuna.png,Wallis and Futuna,France,Australia
+Western Sahara.png,Western Sahara,,Afro Europe
+Faroe Islands.png,Faroe Islands,,Afro Europe
+Greenland.png,Greenland,,North America
+St. Barts.jpg,St. Barts,,Carribbean
+St. Eustatius.jpg,St. Eustatius,,Carribbean
+St. Martin.jpg,St. Martin,,Carribbean

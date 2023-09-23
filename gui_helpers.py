@@ -246,9 +246,17 @@ class TextQuizInterface:
 class ImageQuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
         self.window = tk.Tk()
-        self.window.geometry("720x530")
         self.window.title(quiz_name)
+        self.h = 500
+        self.w = 720
+        if "window_width" in quiz_config["misc"]:
+            self.w = quiz_config["misc"]["window_width"]
+        if "window_height" in quiz_config["misc"]:
+            self.h = quiz_config["misc"]["window_height"]
 
+        print(self.w)
+
+        self.window.geometry(str(self.w) + "x" + str(self.h))
         self.quiz_name = quiz_name
         self.quiz_config = quiz_config
         self.quiz_df = quiz_df
@@ -267,32 +275,33 @@ class ImageQuizInterface:
 
 
         # put on frame to use pixel widths
-        self.frame=tk.Frame(self.window, width=720, height=530)
+        self.frame=tk.Frame(self.window, width=self.w, height=self.h)
         self.frame.pack()
 
         # header
-        tk.Label(master=self.frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=720, height=100)
-        tk.Label(master=self.frame, text=quiz_name, fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
+        tk.Label(master=self.frame, fg="white", bg=self.dark_blue).place(x=0,y=0,width=self.w, height=100)
+        tk.Label(master=self.frame, text=quiz_name, fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=self.w-20, height=80)
 
         # Q and A
         path = "data/"+quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
-        flag_img = ImageTk.PhotoImage(Image.open(path)) 
+        flag_img = ImageTk.PhotoImage(Image.open(path))
         self.qbox = tk.Label(self.frame, image = flag_img)
-        self.qbox.place(x=10,y=120,width=700, height=250)
+        self.qbox.place(x=25,y=100,width=self.w-50, height=self.h-200)
 
         self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25))
-        self.abox.place(x=10,y=380,width=700, height=60)
+        self.abox.place(x=10,y=self.h-100,width=700, height=60)
         self.abox.bind("<Return>", self.handle_enter)
 
         # footer
-        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=490,width=720, height=40)
-        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=495,width=710, height=30)
+        basex = self.h - 40
+        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=basex,width=self.w, height=40)
+        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=basex+5,width=self.w-10, height=30)
         self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.finished_count_label.place(x=10,y=500,width=80, height=20)
+        self.finished_count_label.place(x=10,y=basex+10,width=80, height=20)
         self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.correct_count_label.place(x=300,y=500,width=80, height=20)
+        self.correct_count_label.place(x=300,y=basex+10,width=80, height=20)
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.incorrect_count_label.place(x=590,y=500,width=100, height=20)
+        self.incorrect_count_label.place(x=590,y=basex+10,width=100, height=20)
 
 
 
@@ -307,7 +316,7 @@ class ImageQuizInterface:
         self.abox.delete(0, tk.END)
 
         path = "data/"+self.quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
-        flag_img = ImageTk.PhotoImage(Image.open(path)) 
+        flag_img = ImageTk.PhotoImage(Image.open(path))
         self.qbox.config(image=flag_img)
         self.qbox.image = flag_img
 
