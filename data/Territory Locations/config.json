@@ -1,8 +1,8 @@
 {
     "misc": {
         "type":"image",
-        "window_width":1060,
-        "window_height":700
+        "window_width":1460,
+        "window_height":1000
     },
     
     "single_check": {
@@ -15,7 +15,8 @@
             "Afro Europe": "True",
             "Australia": "True",
             "Oceania": "True",
-            "North America": "True"
+            "North America": "True",
+            "Carribbean":"True"
         }
     },
 

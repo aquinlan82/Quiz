@@ -144,8 +144,6 @@ class QuizConfigInterface:
 # The quiz itself
 class TextQuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
-        print(quiz_df)
-
         self.window = tk.Tk()
         self.window.geometry("720x530")
         self.window.title(quiz_name)
@@ -165,6 +163,7 @@ class TextQuizInterface:
         self.incorrect_count = 0
 
         self.phase = "To Answer"
+        self.quiz_df["Correct"] = True
 
 
         # put on frame to use pixel widths
@@ -191,8 +190,6 @@ class TextQuizInterface:
         self.correct_count_label.place(x=300,y=500,width=80, height=20)
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.incorrect_count_label.place(x=590,y=500,width=100, height=20)
-
-
 
         self.window.mainloop()
 
@@ -224,6 +221,7 @@ class TextQuizInterface:
         else:
             self.finished_count += 1
             self.incorrect_count += 1
+            self.quiz_df.at[self.index,"Correct"] = False
 
             self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
             self.incorrect_label_temp.place(x=50,y=260,width=170, height=80)
@@ -254,8 +252,6 @@ class ImageQuizInterface:
         if "window_height" in quiz_config["misc"]:
             self.h = quiz_config["misc"]["window_height"]
 
-        print(self.w)
-
         self.window.geometry(str(self.w) + "x" + str(self.h))
         self.quiz_name = quiz_name
         self.quiz_config = quiz_config
@@ -272,6 +268,7 @@ class ImageQuizInterface:
         self.incorrect_count = 0
 
         self.phase = "To Answer"
+        self.quiz_df["Correct"] = True
 
 
         # put on frame to use pixel widths
@@ -286,22 +283,21 @@ class ImageQuizInterface:
         path = "data/"+quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
         flag_img = ImageTk.PhotoImage(Image.open(path))
         self.qbox = tk.Label(self.frame, image = flag_img)
-        self.qbox.place(x=25,y=100,width=self.w-50, height=self.h-200)
+        self.qbox.place(x=10,y=110,width=self.w-20, height=self.h-300)   #self.h -100 from top -180 from bottom -20 for buffer
 
         self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25))
-        self.abox.place(x=10,y=self.h-100,width=700, height=60)
+        self.abox.place(x=10,y=self.h-180,width=self.w-20, height=60)
         self.abox.bind("<Return>", self.handle_enter)
 
         # footer
-        basex = self.h - 40
-        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=basex,width=self.w, height=40)
-        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=basex+5,width=self.w-10, height=30)
+        tk.Label(master=self.frame, bg=self.dark_blue).place(x=0,y=self.h - 40,width=self.w, height=40)
+        tk.Label(master=self.frame, bg=self.light_blue).place(x=5,y=self.h - 35,width=self.w-10, height=30)
         self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.finished_count_label.place(x=10,y=basex+10,width=80, height=20)
+        self.finished_count_label.place(x=self.w*0.014,y=self.h - 30,width=80, height=20)
         self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.correct_count_label.place(x=300,y=basex+10,width=80, height=20)
+        self.correct_count_label.place(x=self.w*0.418,y=self.h - 30,width=80, height=20)
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.incorrect_count_label.place(x=590,y=basex+10,width=100, height=20)
+        self.incorrect_count_label.place(x=self.w*0.819,y=self.h - 30,width=100, height=20)
 
 
 
@@ -329,22 +325,23 @@ class ImageQuizInterface:
 
     # When question is answered, move to next question OR check if correct and add widgets for feedback
     def handle_answer(self):
-        if self.abox.get() == self.quiz_df.iloc[self.index]["Axis 2"]:
+        if str.lower(self.abox.get()) == str.lower(self.quiz_df.iloc[self.index]["Axis 2"]):
             self.finished_count += 1
             self.correct_count += 1
+            self.quiz_df.setvalue(self.index,"Correct", False)
 
             correct_label_temp = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
-            correct_label_temp.place(x=50,y=450,width=130, height=30)
+            correct_label_temp.place(x=50,y=self.h-100,width=130, height=30)
             correct_label_temp.after(500, partial(self.updateQA, [correct_label_temp]))
         else:
             self.finished_count += 1
             self.incorrect_count += 1
 
             self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
-            self.incorrect_label_temp.place(x=50,y=450,width=130, height=30)
+            self.incorrect_label_temp.place(x=50,y=self.h-100,width=130, height=30)
 
             self.answer_label_temp = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
-            self.answer_label_temp.place(x=300,y=450,width=700, height=30)
+            self.answer_label_temp.place(x=300,y=self.h-100,width=700, height=30)
 
             self.phase = "To Move On"
 
@@ -372,6 +369,8 @@ class ResultsInterface:
         self.finished_count = quiz_results.finished_count
         self.correct_count = quiz_results.correct_count
 
+        self.redo = False
+
         # put on frame to use pixel widths
         frame=tk.Frame(self.window, width=720, height=300)
         frame.pack()
@@ -381,22 +380,31 @@ class ResultsInterface:
         tk.Label(master=frame, text="Results", fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=700, height=80)
 
         # adaptive message
-        perc = self.correct_count / self.finished_count
-        text = "Snarky Message Here"
-        if perc == 1:
-            "Perfect Score!"
-        elif perc > 0.9:
-            text = "Nice :)"
-        elif perc > 0.7:
-            text = "Meh"
-        elif perc > 0.5:
-            text = "... You Tried"
-        else:
-            text = "That's rough, buddy"
-        tk.Label(master=frame, text=text, fg="black",font=("Times New Roman", 25)).place(x=10,y=100,width=700, height=80)
+        if self.finished_count > 0:
+            perc = self.correct_count / self.finished_count
+            text = "Snarky Message Here"
+            if perc == 1:
+                "Perfect Score!"
+            elif perc > 0.9:
+                text = "Nice :)"
+            elif perc > 0.7:
+                text = "Meh"
+            elif perc > 0.5:
+                text = "... You Tried"
+            else:
+                text = "That's rough, buddy"
+            tk.Label(master=frame, text=text, fg="black",font=("Times New Roman", 25)).place(x=10,y=100,width=700, height=80)
 
         # score
-        tk.Label(master=frame, text=str(self.correct_count) + "/" + str(self.finished_count), fg="black",font=("Times New Roman", 25)).place(x=10,y=200,width=700, height=80)
+        tk.Label(master=frame, text=str(self.correct_count) + "/" + str(self.finished_count), fg="black",font=("Times New Roman", 25)).place(x=10,y=150,width=700, height=80)
 
+        # redo button
+        button = tk.Button(master=frame, text="Redo Incorrect Questions", fg="white", bg=self.light_blue, font=("Times New Roman", 15))
+        button.bind("<Button-1>", self.handle_button)
+        button.place(x=250,y=230, width=250, height=50)
 
         self.window.mainloop()
+
+    def handle_button(self, event):
+        self.redo = True
+        self.window.destroy()

@@ -38,7 +38,7 @@ def filter_axes(quiz_config, axes):
 
 def randomize_axes(quiz_config, axes):
     count = quiz_config["number_value"]["Number of Questions?"]
-    axes = axes.sample(n=min(int(count), len(axes)))
+    axes = axes.sample(n=min(int(count), len(axes))).reset_index()
     return axes
 
 
