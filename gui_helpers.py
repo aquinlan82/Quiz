@@ -187,7 +187,7 @@ class TextQuizInterface:
         self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.finished_count_label.place(x=10,y=500,width=80, height=20)
         self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.correct_count_label.place(x=300,y=500,width=80, height=20)
+        self.correct_count_label.place(x=300,y=500,width=100, height=20)
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.incorrect_count_label.place(x=590,y=500,width=100, height=20)
 
@@ -280,8 +280,7 @@ class ImageQuizInterface:
         tk.Label(master=self.frame, text=quiz_name, fg="white", bg=self.light_blue,font=("Times New Roman", 25)).place(x=10,y=10,width=self.w-20, height=80)
 
         # Q and A
-        path = "data/"+quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
-        flag_img = ImageTk.PhotoImage(Image.open(path))
+        flag_img = self.get_image()
         self.qbox = tk.Label(self.frame, image = flag_img)
         self.qbox.place(x=10,y=110,width=self.w-20, height=self.h-300)   #self.h -100 from top -180 from bottom -20 for buffer
 
@@ -295,7 +294,7 @@ class ImageQuizInterface:
         self.finished_count_label = tk.Label(master=self.frame, text="0/"+str(len(self.quiz_df)), bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.finished_count_label.place(x=self.w*0.014,y=self.h - 30,width=80, height=20)
         self.correct_count_label = tk.Label(master=self.frame, text="Correct: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
-        self.correct_count_label.place(x=self.w*0.418,y=self.h - 30,width=80, height=20)
+        self.correct_count_label.place(x=self.w*0.418,y=self.h - 30,width=100, height=20)
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.incorrect_count_label.place(x=self.w*0.819,y=self.h - 30,width=100, height=20)
 
@@ -311,8 +310,7 @@ class ImageQuizInterface:
             return
         self.abox.delete(0, tk.END)
 
-        path = "data/"+self.quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
-        flag_img = ImageTk.PhotoImage(Image.open(path))
+        flag_img = self.get_image()
         self.qbox.config(image=flag_img)
         self.qbox.image = flag_img
 
@@ -328,7 +326,6 @@ class ImageQuizInterface:
         if str.lower(self.abox.get()) == str.lower(self.quiz_df.iloc[self.index]["Axis 2"]):
             self.finished_count += 1
             self.correct_count += 1
-            self.quiz_df.setvalue(self.index,"Correct", False)
 
             correct_label_temp = tk.Label(master=self.frame, text="Correct!", fg="green", font=("Times New Roman", 25), anchor="w", highlightbackground="green", highlightthickness=3)
             correct_label_temp.place(x=50,y=self.h-100,width=130, height=30)
@@ -336,6 +333,7 @@ class ImageQuizInterface:
         else:
             self.finished_count += 1
             self.incorrect_count += 1
+            self.quiz_df.at[self.index,"Correct"] = False
 
             self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
             self.incorrect_label_temp.place(x=50,y=self.h-100,width=130, height=30)
@@ -354,6 +352,19 @@ class ImageQuizInterface:
         elif self.phase == "To Move On":
             self.phase = "To Answer"
             self.updateQA([self.incorrect_label_temp, self.answer_label_temp])
+
+
+    def get_image(self):
+        path = "data/"+self.quiz_name+"/images/"+self.quiz_df.iloc[self.index]["Axis 1"]
+        img = Image.open(path)
+        cur_size = list(img.size)
+        max_size = [self.w-20, self.h-300]
+        ratio = min([max_size[0] / cur_size[0], max_size[1] / cur_size[1]])
+        new_size = (int(cur_size[0] * ratio), int(cur_size[1] * ratio))
+        flag_img = ImageTk.PhotoImage(img.resize(new_size))
+        return flag_img
+
+
 
 # Display results
 class ResultsInterface:

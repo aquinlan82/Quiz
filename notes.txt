@@ -2,20 +2,10 @@ pyinstaller -F runme.py
 
 
 ~Button to show image hint in text only quizzes
-~Redo the ones missed
 ~Morse code game
+~I was right button
+~asl
 
-
-
-TODO
-Territory Flags
-State Flags
-
-
-
-# given a static map type country name - image might be zoomed in on continent
-Country Locations - shown image      # all are countries
-Island Locations - shown image       # mixed, as long as its an island
 
 
 # given a country chose part of the world to zoom in on and then choose country

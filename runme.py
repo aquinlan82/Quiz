@@ -4,7 +4,7 @@ from gui_helpers import *
 
 
 # If True use screens to choose quiz if false use capitals
-if False:
+if True:
     quiz_list = read_quiz_options()
     quiz_name = QuizOptionInterface(quiz_list).selected_quiz_name
 

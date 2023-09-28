@@ -1,0 +1,31 @@
+{
+    "misc": {
+        "type":"image",
+        "window_width":1460,
+        "window_height":1000
+    },
+    
+    "single_check": {
+
+    },
+    
+    "grouped_check": {
+    
+        "Physical Region": {
+            "Afro Europe": "True",
+            "Australia": "True",
+            "Oceania": "True",
+            "North America": "True",
+            "Carribbean":"True"
+        }
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":68,
+            "upper_limit":68,
+            "lower_limit":5
+        }
+    }
+    
+}

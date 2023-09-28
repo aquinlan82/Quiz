@@ -1,0 +1,22 @@
+{
+    "misc": {
+        "type":"image"
+    },
+    
+    "single_check": {
+
+    },
+    
+    "grouped_check": {
+    
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":38,
+            "upper_limit":38,
+            "lower_limit":5
+        }
+    }
+    
+}

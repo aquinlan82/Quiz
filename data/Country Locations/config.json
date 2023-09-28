@@ -1,0 +1,32 @@
+{
+    "misc": {
+        "type":"image",
+        "window_width":1460,
+        "window_height":1000
+    },
+    
+    "single_check": {
+
+    },
+    
+    "grouped_check": {
+    
+        "Continents": {
+            "Africa": "True",
+            "Asia": "True",
+            "Oceania": "True",
+            "Europe": "True",
+            "North America": "True",
+            "South America": "True"
+        }
+    },
+
+    "number_value": {
+        "Number of Questions?":{
+            "default_val":197,
+            "upper_limit":197,
+            "lower_limit":10
+        }
+    }
+    
+}
