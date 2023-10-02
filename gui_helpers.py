@@ -52,6 +52,12 @@ class QuizOptionInterface:
 # Display settings for the chosen quiz
 class QuizConfigInterface:
     def __init__(self, quiz_config):
+        if "special" in quiz_config["misc"]["type"]:
+            self.quiz_config = quiz_config
+            return
+
+        print("hi")
+
         self.window = tk.Tk()
         self.window.geometry("720x830")
         self.window.title("Quiz Config Options")
@@ -241,6 +247,8 @@ class TextQuizInterface:
             self.phase = "To Answer"
             self.updateQA([self.incorrect_label_temp, self.answer_label_temp])
 
+# The quiz itself
+
 class ImageQuizInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
         self.window = tk.Tk()
@@ -298,8 +306,6 @@ class ImageQuizInterface:
         self.incorrect_count_label = tk.Label(master=self.frame, text="Incorrect: 0", bg=self.light_blue, fg="white", font=("Times New Roman", 15))
         self.incorrect_count_label.place(x=self.w*0.819,y=self.h - 30,width=100, height=20)
 
-
-
         self.window.mainloop()
 
     # move to next question by deleting feedback widgets and incrementing through df
@@ -336,12 +342,26 @@ class ImageQuizInterface:
             self.quiz_df.at[self.index,"Correct"] = False
 
             self.incorrect_label_temp = tk.Label(master=self.frame, text="Incorrect :(", fg="red", font=("Times New Roman", 25), anchor="w", highlightbackground="red", highlightthickness=3)
-            self.incorrect_label_temp.place(x=50,y=self.h-100,width=130, height=30)
+            self.incorrect_label_temp.place(x=30,y=self.h-100,width=130, height=30)
 
             self.answer_label_temp = tk.Label(master=self.frame, text=self.quiz_df.iloc[self.index]["Axis 2"], fg="black", font=("Times New Roman", 25), anchor="w")
             self.answer_label_temp.place(x=300,y=self.h-100,width=700, height=30)
 
             self.phase = "To Move On"
+
+            self.override_button = tk.Button(master=self.frame, text="O", fg="white", bg=self.dark_blue, font=("Times New Roman", 15))
+            self.override_button.bind("<Button-1>", self.handle_override)
+            self.override_button.place(x=self.w - 60,y=self.h-100, width=50, height=50)
+
+    def handle_override(self, event):
+        self.quiz_df.at[self.index,"Correct"] = True
+        self.incorrect_count -= 1
+        self.correct_count += 1
+
+        self.phase = "To Answer"
+        self.updateQA([self.incorrect_label_temp, self.answer_label_temp, self.override_button])
+        
+
 
     # Enter can be used to trigger two events:
     #   If a question was just answered it should be checked and setup next screen based on correctness
@@ -363,8 +383,6 @@ class ImageQuizInterface:
         new_size = (int(cur_size[0] * ratio), int(cur_size[1] * ratio))
         flag_img = ImageTk.PhotoImage(img.resize(new_size))
         return flag_img
-
-
 
 # Display results
 class ResultsInterface:
@@ -398,9 +416,9 @@ class ResultsInterface:
                 "Perfect Score!"
             elif perc > 0.9:
                 text = "Nice :)"
-            elif perc > 0.7:
-                text = "Meh"
             elif perc > 0.5:
+                text = "Meh"
+            elif perc > 0.3:
                 text = "... You Tried"
             else:
                 text = "That's rough, buddy"

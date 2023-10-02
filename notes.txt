@@ -1,10 +1,7 @@
 pyinstaller -F runme.py
 
-
-~Button to show image hint in text only quizzes
 ~Morse code game
-~I was right button
-~asl
+~asl dictionary with gifs and quiz
 
 
 
