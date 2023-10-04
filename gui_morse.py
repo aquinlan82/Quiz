@@ -4,6 +4,9 @@ from PIL import ImageTk, Image
 import re
 import wikipedia
 
+
+#- .... ..- .../.. .../.-/- . .-. -.
+
 # The quiz itself
 class MorseInterface:
     def __init__(self, quiz_name, quiz_config, quiz_df):
@@ -119,15 +122,17 @@ class MorseInterface:
         return answer
     
     # determine what parts of input are wrong
-    def get_tag_regions(self, answer, attempt):
-        answer_words = answer.split("/")
-        attempt_words = attempt.split("/")
-        slash_indexes = [x.start() for x in re.finditer(r"/",answer)]
+    def get_tag_regions(self, answer, trial):
+        answer_words = " ".join(answer.replace("/", " ").split())
+        answer_words = answer_words.split(" ")
+        trial_words = " ".join(trial.replace("/", " ").split())
+        trial_words = trial_words.split(" ")
+        slash_indexes = [0] + [x.start() for x in re.finditer(r" ",answer)] + [len(answer)]
         regions = []
-        for i, answer_word, attempt_word in enumerate(zip(answer_words, attempt_words)):
-            if answer_word != attempt_word:
+        for i in range(max(len(answer_words), len(trial_words))):
+            if i > len(trial_words) or i > len(answer_words) or answer_words[i] != trial_words[i]:
                 regions.append([slash_indexes[i], slash_indexes[i+1]])
-                # print(answer[regions[-1][0]:regions[-1][0]])
+                print(regions)
                 
         return regions
 
@@ -135,8 +140,15 @@ class MorseInterface:
     def highlight_correctness(self):
         answer = self.get_morse()
         attempt = self.abox.get()
-        # regions = self.get_tag_regions(answer, attempt)
+        regions = self.get_tag_regions(answer, attempt)
 
-        self.answer_label = tk.Label(master=self.frame, text=answer, fg="black", font=("Times New Roman", 25), justify="left", anchor="nw")
+        self.answer_label = tk.Text(master=self.frame, bg='#F0F0F0', fg="black", font=("Times New Roman", 25))
+        self.answer_label.insert(tk.INSERT, answer)
+        self.answer_label.tag_config("start", foreground="red")
+        for r in regions:
+            self.answer_label.tag_add("start", "1."+str(r[0]), "1."+str(r[1])) 
+        self.answer_label.config(state='disabled')
         self.answer_label.place(x=10,y=450,width=1380, height=50)
 
+
+#- .... ..- .../.. .../.-/- . .-. -.
