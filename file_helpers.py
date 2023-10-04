@@ -14,6 +14,10 @@ def read_quiz_config(quiz_name):
 
 def get_quiz(quiz_name, quiz_config):
     axes  = pd.read_csv("data/" + quiz_name + "/data.csv")
+    if "special" in quiz_config["misc"]["type"]:
+        axes = axes.sample(n=len(axes)).reset_index()
+        return axes
+    
     reversed = reverse_axes(quiz_config, axes)
     filtered = filter_axes(quiz_config, reversed)
     random = randomize_axes(quiz_config, filtered)

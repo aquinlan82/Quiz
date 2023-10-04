@@ -13,13 +13,15 @@ class MorseInterface:
 
         self.quiz_name = quiz_name
         self.quiz_config = quiz_config
+        self.quiz_df = quiz_df
 
         self.light_blue = "#34A2FE"
         self.dark_blue = "#3458EB"
         self.gold = "#E6C35C"
 
         self.index = 0
-        self.next_q = False
+        self.state = "highlight"
+
 
 
         # put on frame to use pixel widths
@@ -35,63 +37,106 @@ class MorseInterface:
         self.qbox = tk.Text(master=self.frame, font=("Times New Roman", 25), bg=self.light_blue, wrap=tk.WORD)
         self.qbox.insert(tk.INSERT, self.sentences[self.index])
         self.qbox.tag_config("start", foreground="red")
-        self.highlight_word(setup=True)
+        self.qbox.tag_add("start", "1.0", "1.1") 
         self.qbox.config(state='disabled')
-        self.qbox.place(x=10,y=120,width=1380, height=250)
+        self.qbox.place(x=10,y=120,width=1380, height=200)
 
         # Answer
         self.abox = tk.Entry(master=self.frame, bg="white", font=("Times New Roman", 25), justify="left")
-        self.abox.place(x=10,y=400,width=1380, height=100)
+        self.abox.place(x=10,y=350,width=1380, height=50)
         self.abox.bind("<Return>", self.handle_enter)
-        # self.abox.bind("<Key>", self.handle_space)
-        self.abox.bind("<space>", self.handle_space)
+        self.abox.bind("<Key>", self.handle_key)
 
         self.window.mainloop()
 
+    # pull random sentence from wikipedia
     def get_sentences(self):
         text = wikipedia.page(wikipedia.random()).content
         sentences = text.replace("\n","").split(".")
         # do some more cleaning
         return sentences
     
+    # helper method to get question sentence
     def get_qbox(self):
-        print("before")
         return self.qbox.get("1.0", tk.END)
     
-    def highlight_word(self, setup=False):
-        # all word start/ends
-        space_indexes = [0] + [x.start() for x in re.finditer(r" ",self.get_qbox())] + [(len(self.get_qbox()))]
-
-        # get index for word we are on
-        if setup:
-            spaces_before = 0
-        elif self.get_qbox()[-1] == "\n":     # for some reason newline means space
-            spaces_before = self.abox.get().count(" ") + 1
-        else:
-            spaces_before = self.abox.get().count(" ")
-        
-        # remove any existing tags
-        self.qbox.tag_remove("start", "1.0", "1."+str(len(self.get_qbox())))
-
-        # add tag when still on words
-        if spaces_before < len(space_indexes)-1:
-            i1 = space_indexes[spaces_before]
-            i2 = space_indexes[spaces_before+1]
-            self.qbox.tag_add("start", "1."+str(i1), "1."+str(i2))         
-        else:
-            self.next_q = True
-
-
-    def handle_space(self, event):
-        self.highlight_word()
+    def get_a_indexes(self, text, word_seperator="/", char_seperator=" "):
+        word_index = text.count(word_seperator)
+        text = text[max(0, text.rfind(word_seperator)):]
+        letter_index = text.count(char_seperator)
+        return word_index, letter_index
     
+    def get_q_index(self, text, word_index, letter_index):
+        word_indexes = [-1] + [x.start() for x in re.finditer(r" ",text)] + [len(text)]
+        word_count = text.split(" ")
+        if word_index >= len(word_count):
+            return -1
+        max_len = len(word_count[word_index])
+        answer_index = word_indexes[word_index] + 1 + min(max_len, letter_index)
+        return answer_index        
+    
+    # highlight the letter being typed
+    def highlight_letter(self, answer):
+        w,l = self.get_a_indexes(answer)
+        answer_index = self.get_q_index(self.get_qbox(), w,l)
+
+        self.qbox.tag_remove("start", "1.0", "1."+str(len(self.get_qbox())))
+        self.qbox.tag_add("start", "1."+str(answer_index), "1."+str(answer_index+1))   
+
+    # change highlighting as keys pressed
+    def handle_key(self, event):
+        answer = self.abox.get() + event.char
+        self.highlight_letter(answer)
+
+    # switch from showing correct answer or to next question on enter
     def handle_enter(self, event):
-        if self.next_q:
+        if self.state == "highlight":
+            self.highlight_correctness()
+            self.state = "next q"
+        elif self.state == "next q":
             self.index += 1
             self.qbox.config(state='normal')
             self.qbox.delete('1.0', tk.END)
             self.qbox.insert(tk.INSERT, self.sentences[self.index])
             self.qbox.config(state='disabled')
             self.abox.delete('1.0', tk.END)
-            self.next_q = False
+            self.state = "highlight"
+    
+    # translate question into answer for answer key
+    def get_morse(self):
+        answer = ""
+        for letter in self.get_qbox()[:-1]:
+            if letter == " ":
+                answer += "/"
+            else:
+                letter = letter.lower()
+                code = self.quiz_df[self.quiz_df["Letter"].str.lower() == letter]["Code"]
+                if len(code) > 0:
+                    answer += code.values[0] + " "
+                else:
+                    answer += "!"
+
+        return answer
+    
+    # determine what parts of input are wrong
+    def get_tag_regions(self, answer, attempt):
+        answer_words = answer.split("/")
+        attempt_words = attempt.split("/")
+        slash_indexes = [x.start() for x in re.finditer(r"/",answer)]
+        regions = []
+        for i, answer_word, attempt_word in enumerate(zip(answer_words, attempt_words)):
+            if answer_word != attempt_word:
+                regions.append([slash_indexes[i], slash_indexes[i+1]])
+                # print(answer[regions[-1][0]:regions[-1][0]])
+                
+        return regions
+
+    # highlight incorrect portion of input
+    def highlight_correctness(self):
+        answer = self.get_morse()
+        attempt = self.abox.get()
+        # regions = self.get_tag_regions(answer, attempt)
+
+        self.answer_label = tk.Label(master=self.frame, text=answer, fg="black", font=("Times New Roman", 25), justify="left", anchor="nw")
+        self.answer_label.place(x=10,y=450,width=1380, height=50)
 

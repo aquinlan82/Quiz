@@ -12,13 +12,7 @@ quiz_name = "Morse Code Sentences"
 # chose settings for given quiz
 quiz_config = read_quiz_config(quiz_name)
 quiz_config = QuizConfigInterface(quiz_config).quiz_config
-
-
-# process quiz based on selection screens
-if "special" in quiz_config["misc"]["type"]:
-    quiz_df = None
-else:
-    quiz_df = get_quiz(quiz_name, quiz_config)
+quiz_df = get_quiz(quiz_name, quiz_config)
 
 # run quiz until # of qs == 0
 redo = True

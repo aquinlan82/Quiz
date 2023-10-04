@@ -1,11 +1,12 @@
 import pandas as pd
 import wikipedia
+from collections import deque
 
-text = wikipedia.page(wikipedia.random()).content
-sentences = text.replace("\n","").split(".")
-for s in sentences:
-    print(s)
-    print("\n\n")
+# text = wikipedia.page(wikipedia.random()).content
+# sentences = text.replace("\n","").split(".")
+# for s in sentences:
+#     print(s)
+#     print("\n\n")
 
 # wiki_wiki = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)', 'en')
 # page_py = wiki_wiki.page('https://en.wikipedia.org/wiki/Special:Random')
@@ -20,6 +21,7 @@ for s in sentences:
 # # adf["Axis 1"] = adf["Axis 1"].str[:-4] + ".jpg"
 
 # # df = pd.concat([rest,adf])
+# # df = pd.concat([rest,adf])
 
 # # print(df)
 
@@ -27,3 +29,6 @@ for s in sentences:
 
 
 # df.to_csv("data.csv")
+
+
+stack
